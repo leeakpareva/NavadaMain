@@ -36,18 +36,5 @@ Led by Leslie Akpareva, MA, MBA
 16+ years experience as Programme Director
 Expertise in Python Development
 Certified Blockchain Architect
-Dual master's degrees in Business Analytics and Business Administration
-Impact Metrics
-5000+ Lives impacted
-10% Unemployment reduction in target communities
-100% Open-source commitment
-Unique Value Proposition
-Combines AI expertise with social impact
-Focus on sustainable development
-Open-source approach ensuring transparency
-Comprehensive support from training to employment
-Future Vision
-Creating a sustainable ecosystem where technology drives positive social change while enabling business growth and innovation.
-
 
 
