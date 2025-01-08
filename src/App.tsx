@@ -9,6 +9,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import CookieConsent from './components/CookieConsent';
 import ChatWidget from './components/chat/ChatWidget';
+import Dashboard from './components/dashboard/Dashboard';
 
 function App() {
   return (
@@ -20,6 +21,13 @@ function App() {
         className="bg-black"
       >
         <Navbar />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <Dashboard />
+        </motion.div>
         <Hero />
         <About />
         <Programs />
