@@ -11,7 +11,17 @@ export interface Job {
   createdAt: string;
   updatedAt: string;
   techArtisticScore?: number;
+  categories: TechArtisticCategory[];
+  keywordMatches: string[];
+  requiredPairs: number;
 }
+
+export type TechArtisticCategory = 
+  | 'digital_art'
+  | 'ai_creative_tools'
+  | 'blockchain_creative'
+  | 'digital_assistance'
+  | 'tech_innovation';
 
 export type JobStatus = 'new' | 'reviewing' | 'applied' | 'interview_scheduled' | 'offer_received' | 'rejected';
 
@@ -33,6 +43,9 @@ export interface JobFilter {
   minSalary?: number;
   platforms?: string[];
   status?: JobStatus[];
+  categories?: TechArtisticCategory[];
+  minTechArtisticScore?: number;
+  requiredCategories?: number;
 }
 
 export interface AnalyticsData {

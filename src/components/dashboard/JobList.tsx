@@ -50,6 +50,56 @@ const JobList: React.FC<JobListProps> = ({ jobs, filter, onFilterChange }) => {
             className="px-4 py-2 border rounded"
           />
         </div>
+
+        {/* Tech-Artistic Categories */}
+        <div className="space-y-2">
+          <h3 className="font-medium">Tech-Artistic Focus</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+            {['digital_art', 'ai_creative_tools', 'blockchain_creative', 'digital_assistance', 'tech_innovation'].map((category) => (
+              <label key={category} className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  checked={filter.categories?.includes(category as TechArtisticCategory)}
+                  onChange={(e) => {
+                    const currentCategories = filter.categories || [];
+                    const newCategories = e.target.checked
+                      ? [...currentCategories, category as TechArtisticCategory]
+                      : currentCategories.filter(c => c !== category);
+                    onFilterChange({
+                      ...filter,
+                      categories: newCategories
+                    });
+                  }}
+                  className="rounded"
+                />
+                <span className="text-sm capitalize">{category.replace(/_/g, ' ')}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center space-x-4">
+          <input
+            type="number"
+            placeholder="Min Tech-Artistic Score"
+            value={filter.minTechArtisticScore}
+            onChange={(e) => onFilterChange({
+              ...filter,
+              minTechArtisticScore: parseInt(e.target.value)
+            })}
+            className="px-4 py-2 border rounded"
+          />
+          <input
+            type="number"
+            placeholder="Required Categories"
+            value={filter.requiredCategories}
+            onChange={(e) => onFilterChange({
+              ...filter,
+              requiredCategories: parseInt(e.target.value)
+            })}
+            className="px-4 py-2 border rounded"
+          />
+        </div>
       </div>
 
       {/* Job List */}
@@ -75,12 +125,32 @@ const JobList: React.FC<JobListProps> = ({ jobs, filter, onFilterChange }) => {
               <span className="capitalize">{job.status}</span>
             </div>
 
-            {job.techArtisticScore && (
-              <div className="mt-2 text-sm">
-                <span className="font-medium">Tech-Artistic Score: </span>
-                <span className="text-blue-600">{job.techArtisticScore}</span>
-              </div>
-            )}
+            <div className="mt-2 space-y-2">
+              {job.techArtisticScore && (
+                <div className="text-sm">
+                  <span className="font-medium">Tech-Artistic Score: </span>
+                  <span className="text-blue-600">{job.techArtisticScore}</span>
+                </div>
+              )}
+              {job.categories && job.categories.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {job.categories.map(category => (
+                    <span
+                      key={category}
+                      className="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800 capitalize"
+                    >
+                      {category.replace(/_/g, ' ')}
+                    </span>
+                  ))}
+                </div>
+              )}
+              {job.keywordMatches && job.keywordMatches.length > 0 && (
+                <div className="text-sm text-gray-600">
+                  <span className="font-medium">Matches: </span>
+                  {job.keywordMatches.join(', ')}
+                </div>
+              )}
+            </div>
 
             <div className="mt-4">
               <a
