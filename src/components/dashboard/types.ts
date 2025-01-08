@@ -1,19 +1,29 @@
+export interface StatusUpdate {
+  status: JobStatus;
+  timestamp: string;
+  notes?: string;
+}
+
 export interface Job {
   id: string;
   title: string;
   company: string;
   location: string;
-  salary: string;
+  salary: string | number;
   description: string;
   url: string;
   platform: string;
   status: JobStatus;
+  statusHistory: StatusUpdate[];
   createdAt: string;
   updatedAt: string;
   techArtisticScore?: number;
+  cvMatchScore?: number;
   categories: TechArtisticCategory[];
   keywordMatches: string[];
   requiredPairs: number;
+  isRemote?: boolean;
+  employmentType?: 'full-time' | 'contract' | 'self-employed';
 }
 
 export type TechArtisticCategory = 
@@ -45,7 +55,20 @@ export interface JobFilter {
   status?: JobStatus[];
   categories?: TechArtisticCategory[];
   minTechArtisticScore?: number;
+  minCvMatchScore?: number;
+  employmentTypes?: ('full-time' | 'contract' | 'self-employed')[];
   requiredCategories?: number;
+}
+
+export type SortOption = 'cv_match' | 'tech_artistic' | 'salary' | '';
+
+export interface JobListProps {
+  jobs: Job[];
+  filter: JobFilter;
+  onFilterChange: (filter: JobFilter) => void;
+  onStatusUpdate?: (jobId: string, newStatus: JobStatus, notes?: string) => void;
+  onSort?: (sortBy: SortOption, sortedJobs: Job[]) => void;
+  sortBy?: SortOption;
 }
 
 export interface AnalyticsData {
